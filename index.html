@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionario sulla Qualità del Sonno</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .radio-group, .checkbox-group {
+            margin-top: 8px;
+        }
+        
+        .radio-option, .checkbox-option {
+            margin-bottom: 8px;
+        }
+        
+        .radio-option label, .checkbox-option label {
+            font-weight: normal;
+            display: inline;
+            margin-left: 8px;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .error-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        
+        .slider-container {
+            margin-top: 10px;
+        }
+        
+        .slider-value {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Questionario sulla Qualità del Sonno</h1>
+        
+        <!-- Utilizza FormSubmit.co come servizio di invio gratuito -->
+        <!-- Sostituisci YOUR_EMAIL_HERE con la tua email -->
+        <form id="sleepForm" action="https://formsubmit.co/alitela98@gmail.com" method="POST">
+            <!-- Configurazione di FormSubmit -->
+            <input type="hidden" name="_subject" value="Nuova Risposta al Questionario sul Sonno">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value=""> <!-- URL di ringraziamento opzionale -->
+            
+            <div class="form-group">
+                <label for="name">Nome e Cognome <span class="required">*</span></label>
+                <input type="text" id="name" name="Nome" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="Email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="age">Età <span class="required">*</span></label>
+                <input type="number" id="age" name="Età" min="18" max="100" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="gender">Genere <span class="required">*</span></label>
+                <select id="gender" name="Genere" required>
+                    <option value="">Seleziona...</option>
+                    <option value="Uomo">Uomo</option>
+                    <option value="Donna">Donna</option>
+                    <option value="Non binario">Non binario</option>
+                    <option value="Preferisco non rispondere">Preferisco non rispondere</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Quante ore dormi in media ogni notte? <span class="required">*</span></label>
+                <div class="slider-container">
+                    <input type="range" id="sleepHours" name="Ore di sonno" min="0" max="12" step="0.5" value="7" oninput="updateSliderValue('sleepHoursValue', this.value)">
+                    <div class="slider-value" id="sleepHoursValue">7 ore</div>
+                    <div class="range-labels">
+                        <span>0</span>
+                        <span>3</span>
+                        <span>6</span>
+                        <span>9</span>
+                        <span>12</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>A che ora vai solitamente a letto nei giorni feriali? <span class="required">*</span></label>
+                <input type="time" id="bedTimeWeekday" name="Ora di andare a letto (feriali)" required>
+            </div>
+            
+            <div class="form-group">
+                <label>A che ora ti svegli solitamente nei giorni feriali? <span class="required">*</span></label>
+                <input type="time" id="wakeTimeWeekday" name="Ora di svegliarsi (feriali)" required>
+            </div>
+            
+            <div class="form-group">
+                <label>A che ora vai solitamente a letto nei fine settimana? <span class="required">*</span></label>
+                <input type="time" id="bedTimeWeekend" name="Ora di andare a letto (weekend)" required>
+            </div>
+            
+            <div class="form-group">
+                <label>A che ora ti svegli solitamente nei fine settimana? <span class="required">*</span></label>
+                <input type="time" id="wakeTimeWeekend" name="Ora di svegliarsi (weekend)" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Quanto tempo impieghi solitamente per addormentarti? <span class="required">*</span></label>
+                <select id="fallAsleepTime" name="Tempo per addormentarsi" required>
+                    <option value="">Seleziona...</option>
+                    <option value="Meno di 5 minuti">Meno di 5 minuti</option>
+                    <option value="5-15 minuti">5-15 minuti</option>
+                    <option value="15-30 minuti">15-30 minuti</option>
+                    <option value="30-60 minuti">30-60 minuti</option>
+                    <option value="Più di 60 minuti">Più di 60 minuti</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Come valuti la qualità del tuo sonno? <span class="required">*</span></label>
+                <div class="slider-container">
+                    <input type="range" id="sleepQuality" name="Qualità del sonno" min="1" max="10" value="5" oninput="updateSliderValue('sleepQualityValue', this.value, '/10')">
+                    <div class="slider-value" id="sleepQualityValue">5/10</div>
+                    <div class="range-labels">
+                        <span>Molto scarsa</span>
+                        <span>Media</span>
+                        <span>Eccellente</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Quanto ti senti riposato/a al risveglio? <span class="required">*</span></label>
+                <div class="slider-container">
+                    <input type="range" id="restfulness" name="Sensazione di riposo" min="1" max="10" value="5" oninput="updateSliderValue('restfulnessValue', this.value, '/10')">
+                    <div class="slider-value" id="restfulnessValue">5/10</div>
+                    <div class="range-labels">
+                        <span>Per niente</span>
+                        <span>Abbastanza</span>
+                        <span>Completamente</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Quali problemi di sonno riscontri? (seleziona tutte le opzioni applicabili)</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="problem1" name="Problemi di sonno" value="Difficoltà ad addormentarsi">
+                        <label for="problem1">Difficoltà ad addormentarsi</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="problem2" name="Problemi di sonno" value="Risvegli frequenti durante la notte">
+                        <label for="problem2">Risvegli frequenti durante la notte</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="problem3" name="Problemi di sonno" value="Risveglio precoce">
+                        <label for="problem3">Risveglio precoce</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="problem4" name="Problemi di sonno" value="Russare">
+                        <label for="problem4">Russare</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="problem5" name="Problemi di sonno" value="Apnea notturna">
+                        <label for="problem5">Apnea notturna</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="problem6" name="Problemi di sonno" value="Incubi">
+                        <label for="problem6">Incubi</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="problem7" name="Problemi di sonno" value="Gambe senza riposo">
+                        <label for="problem7">Gambe senza riposo</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="problem8" name="Problemi di sonno" value="Nessun problema">
+                        <label for="problem8">Nessun problema</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Usi dispositivi elettronici (telefono, tablet, TV) prima di dormire? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="electronics1" name="Dispositivi elettronici" value="Mai" required>
+                        <label for="electronics1">Mai</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="electronics2" name="Dispositivi elettronici" value="Raramente">
+                        <label for="electronics2">Raramente</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="electronics3" name="Dispositivi elettronici" value="A volte">
+                        <label for="electronics3">A volte</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="electronics4" name="Dispositivi elettronici" value="Spesso">
+                        <label for="electronics4">Spesso</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="electronics5" name="Dispositivi elettronici" value="Sempre">
+                        <label for="electronics5">Sempre</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Quanto tempo prima di andare a letto smetti di consumare caffeina (caffè, tè, energy drink)? <span class="required">*</span></label>
+                <select id="caffeineTime" name="Tempo senza caffeina" required>
+                    <option value="">Seleziona...</option>
+                    <option value="Non consumo caffeina">Non consumo caffeina</option>
+                    <option value="Meno di 1 ora">Meno di 1 ora</option>
+                    <option value="1-3 ore">1-3 ore</option>
+                    <option value="3-6 ore">3-6 ore</option>
+                    <option value="6+ ore">6+ ore</option>
+                    <option value="Bevo caffè anche prima di dormire">Bevo caffè anche prima di dormire</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Hai una routine prima di andare a dormire? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="routine1" name="Routine serale" value="Sì, sempre" required>
+                        <label for="routine1">Sì, sempre</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="routine2" name="Routine serale" value="A volte">
+                        <label for="routine2">A volte</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="routine3" name="Routine serale" value="Raramente">
+                        <label for="routine3">Raramente</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="routine4" name="Routine serale" value="Mai">
+                        <label for="routine4">Mai</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="routineDescription">Se hai una routine, puoi descriverla brevemente?</label>
+                <textarea id="routineDescription" name="Descrizione routine" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Ti svegli durante la notte? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="wakeup1" name="Risvegli notturni" value="Mai" required>
+                        <label for="wakeup1">Mai</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="wakeup2" name="Risvegli notturni" value="Raramente">
+                        <label for="wakeup2">Raramente</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="wakeup3" name="Risvegli notturni" value="A volte">
+                        <label for="wakeup3">A volte</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="wakeup4" name="Risvegli notturni" value="Spesso">
+                        <label for="wakeup4">Spesso</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="wakeup5" name="Risvegli notturni" value="Ogni notte">
+                        <label for="wakeup5">Ogni notte</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Quanto è buia la stanza in cui dormi? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="darkness1" name="Oscurità" value="Completamente buia" required>
+                        <label for="darkness1">Completamente buia</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="darkness2" name="Oscurità" value="Prevalentemente buia">
+                        <label for="darkness2">Prevalentemente buia</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="darkness3" name="Oscurità" value="Moderatamente buia">
+                        <label for="darkness3">Moderatamente buia</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="darkness4" name="Oscurità" value="Leggermente illuminata">
+                        <label for="darkness4">Leggermente illuminata</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="darkness5" name="Oscurità" value="Ben illuminata">
+                        <label for="darkness5">Ben illuminata</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Quanto è silenziosa la stanza in cui dormi? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="quiet1" name="Silenziosità" value="Completamente silenziosa" required>
+                        <label for="quiet1">Completamente silenziosa</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="quiet2" name="Silenziosità" value="Prevalentemente silenziosa">
+                        <label for="quiet2">Prevalentemente silenziosa</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="quiet3" name="Silenziosità" value="Moderatamente silenziosa">
+                        <label for="quiet3">Moderatamente silenziosa</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="quiet4" name="Silenziosità" value="Leggermente rumorosa">
+                        <label for="quiet4">Leggermente rumorosa</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="quiet5" name="Silenziosità" value="Molto rumorosa">
+                        <label for="quiet5">Molto rumorosa</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="sleepImprovements">Cosa pensi potrebbe migliorare la qualità del tuo sonno?</label>
+                <textarea id="sleepImprovements" name="Possibili miglioramenti" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="additionalComments">Commenti aggiuntivi sulla tua esperienza di sonno:</label>
+                <textarea id="additionalComments" name="Commenti aggiuntivi" rows="3"></textarea>
+            </div>
+            
+            <button type="submit">Invia Questionario</button>
+        </form>
+        
+        <div class="success-message" id="successMessage">
+            Grazie! Il tuo questionario è stato inviato con successo.
+        </div>
+        
+        <div class="error-message" id="errorMessage">
+            Si è verificato un errore durante l'invio. Riprova più tardi.
+        </div>
+    </div>
+    
+    <script>
+        function updateSliderValue(elementId, value, suffix = '') {
+            const element = document.getElementById(elementId);
+            if (elementId === 'sleepHoursValue') {
+                element.textContent = value + ' ore';
+            } else {
+                element.textContent = value + suffix;
+            }
+        }
+        
+        // Gestione della visualizzazione del messaggio di successo/errore
+        document.getElementById('sleepForm').addEventListener('submit', function(e) {
+            // FormSubmit gestirà l'invio, ma possiamo aggiungere validazione extra qui
+        });
+        
+        // Inizializza i valori degli slider
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSliderValue('sleepHoursValue', document.getElementById('sleepHours').value);
+            updateSliderValue('sleepQualityValue', document.getElementById('sleepQuality').value, '/10');
+            updateSliderValue('restfulnessValue', document.getElementById('restfulness').value, '/10');
+        });
+    </script>
+</body>
+</html>
